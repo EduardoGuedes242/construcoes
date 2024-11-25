@@ -1,25 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import BotaoProrio from './widgets/botao';
+import EditProprio from './widgets/edit';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <EditProprio title={'Descrição'} />
+        <p></p>
+        <EditProprio title={'Largura'} />
+        <p>X</p>
+        <EditProprio title={'Altura'} />
+        <p></p>
+        <BotaoProrio title={'Calcular'} />
       </header>
     </div>
   );
 }
+
 
 export default App;
