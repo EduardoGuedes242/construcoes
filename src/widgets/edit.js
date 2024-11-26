@@ -1,11 +1,26 @@
-export default function EditProprio({ title }) {
-    return (
-        <>
-            <label className="titulo-proprio">
-                {title}
-            </label>
+import React, { useState } from "react";
 
-            <input className="input-proprio" />
-        </>
-    );
-}
+const Edit = ({ title, placeholder = "", onValueChange }) => {
+  const [value, setValue] = useState("");
+
+  const handleChange = e => {
+    setValue(e.target.value);
+    if (onValueChange) {
+      onValueChange(e.target.value);
+    }
+  };
+
+  return (
+    <div>
+      <label>{title}</label>
+      <input
+        type="number"
+        value={value}
+        onChange={handleChange}
+        placeholder={placeholder}
+      />
+    </div>
+  );
+};
+
+export default Edit;

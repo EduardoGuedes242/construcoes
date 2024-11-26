@@ -1,34 +1,59 @@
-import { useState } from 'react';
-import './App.css';
-import BotaoProrio from './widgets/botao';
-import DropBox from './widgets/dropdown';
-import EditProprio from './widgets/edit';
+import { useState } from "react";
+import "./App.css";
+import BotaoProrio from "./widgets/botao";
+import "./common/global";
+
+import Edit from "./widgets/edit";
+import { arredondarParaCima } from "./common/global";
 
 function App() {
-
-  const [descricao, setDescricao] = useState('');
+  const [largura, setLargura] = useState("");
+  const [altura, setAltura] = useState("");
+  const [resultadosCalculos, setResultadosCalculos] = useState("");
 
   function funcao() {
-    console.log('teste: ' + descricao)
+    const areaTotal = largura * altura;
+
+    const quantidadePlacas = areaTotal / (1.2 * 2.4);
+
+    const quantosMetrosPerfilHorizontais = largura * 2;
+
+    const montantesVerticais = largura / 0.6 + 1;
+
+    const quantidadePlacasArredondadas = arredondarParaCima(quantidadePlacas);
+    const montantesVerticaisArredondas = arredondarParaCima(montantesVerticais);
+
+    setResultadosCalculos(
+      "Area da parede: " +
+        areaTotal +
+        "\nQuantidade de Placas: " +
+        quantidadePlacasArredondadas +
+        "\nPerfis Horizontal: " +
+        quantosMetrosPerfilHorizontais +
+        "\nPerfis Vertical: " +
+        montantesVerticaisArredondas
+    );
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <input value={descricao} onChange={e => setDescricao(e.target.value)}></input>
-        <EditProprio title={'Descrição'} />
+        <Edit
+          title="Largura"
+          placeholder="Digite a largura"
+          onValueChange={value => setLargura(value)}
+        />
+        <Edit
+          title="Altura"
+          placeholder="Digite a altura"
+          onValueChange={value => setAltura(value)}
+        />
+        <BotaoProrio title={"Calcular"} onClick={funcao} />
         <p></p>
-        <DropBox></DropBox>
-        <p></p>
-        <EditProprio title={'Largura'} />
-        <p>X</p>
-        <EditProprio title={'Altura'} />
-        <p></p>
-        <BotaoProrio title={'Calcular'} onClick={funcao} />
+        <p>{resultadosCalculos}</p>
       </header>
     </div>
   );
 }
+
 export default App;
-
-
