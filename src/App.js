@@ -5,6 +5,7 @@ import "./common/global";
 
 import Edit from "./widgets/edit";
 import { arredondarParaCima } from "./common/global";
+import DropdownTamanhoPlaca from "./widgets/dropdown";
 
 function App() {
   const [largura, setLargura] = useState("");
@@ -21,17 +22,18 @@ function App() {
     const montantesVerticais = largura / 0.6 + 1;
 
     const quantidadePlacasArredondadas = arredondarParaCima(quantidadePlacas);
-    const montantesVerticaisArredondas = arredondarParaCima(montantesVerticais);
+    const montantesVerticaisArredondadas =
+      arredondarParaCima(montantesVerticais);
 
     setResultadosCalculos(
       "Area da parede: " +
         areaTotal +
-        "\nQuantidade de Placas: " +
+        "M2 \nQuantidade de Placas: " +
         quantidadePlacasArredondadas +
         "\nPerfis Horizontal: " +
         quantosMetrosPerfilHorizontais +
-        "\nPerfis Vertical: " +
-        montantesVerticaisArredondas
+        "MT \nPerfis Vertical: " +
+        montantesVerticaisArredondadas
     );
   }
 
@@ -39,15 +41,25 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Edit
-          title="Largura"
-          placeholder="Digite a largura"
+          title="Descrição "
+          placeholder="Exemplo: Quarto"
           onValueChange={value => setLargura(value)}
         />
+        <p></p>
         <Edit
-          title="Altura"
-          placeholder="Digite a altura"
+          title="Largura da parede MT "
+          placeholder="Exemplo: 4"
+          onValueChange={value => setLargura(value)}
+        />
+        <p></p>
+        <Edit
+          title="Altura da parede MT "
+          placeholder="Exemplo: 2,8"
           onValueChange={value => setAltura(value)}
         />
+        <p></p>
+        <DropdownTamanhoPlaca title={"Dimensões da placa "} />
+        <p></p>
         <BotaoProrio title={"Calcular"} onClick={funcao} />
         <p></p>
         <p>{resultadosCalculos}</p>
