@@ -10,30 +10,34 @@ import DropdownTamanhoPlaca from "./widgets/dropdown";
 function App() {
   const [largura, setLargura] = useState("");
   const [altura, setAltura] = useState("");
-  const [resultadosCalculos, setResultadosCalculos] = useState("");
+  const [areaPlacaSelecionada, setAreaPlacaSelecionada] = useState("");
+
+  const [areaTotalText, setAreaTotalText] = useState("");
+  const [quantidadePlacasText, setQuantidadePlacasText] = useState("");
+  const [perfilHorizontalText, setPerfilHorizontalText] = useState("");
+  const [perfilVerticalText, setPerfilVerticalText] = useState("");
 
   function funcao() {
     const areaTotal = largura * altura;
 
-    const quantidadePlacas = areaTotal / (1.2 * 2.4);
+    const quantidadePlacas = areaTotal / areaPlacaSelecionada;
 
     const quantosMetrosPerfilHorizontais = largura * 2;
 
     const montantesVerticais = largura / 0.6 + 1;
 
-    const quantidadePlacasArredondadas = arredondarParaCima(quantidadePlacas);
-    const montantesVerticaisArredondadas =
-      arredondarParaCima(montantesVerticais);
+    setAreaTotalText("Area M2 da parede: " + areaTotal);
 
-    setResultadosCalculos(
-      "Area da parede: " +
-        areaTotal +
-        "M2 \nQuantidade de Placas: " +
-        quantidadePlacasArredondadas +
-        "\nPerfis Horizontal: " +
-        quantosMetrosPerfilHorizontais +
-        "MT \nPerfis Vertical: " +
-        montantesVerticaisArredondadas
+    setQuantidadePlacasText(
+      "Quantidade de placas: " + arredondarParaCima(quantidadePlacas)
+    );
+
+    setPerfilHorizontalText(
+      "Total Metros de perfil Horizontal: " + quantosMetrosPerfilHorizontais
+    );
+
+    setPerfilVerticalText(
+      "Quantidade de perfil vertical: " + arredondarParaCima(montantesVerticais)
     );
   }
 
@@ -42,6 +46,7 @@ function App() {
       <header className="App-header">
         <Edit
           title="Descrição "
+          type="text"
           placeholder="Exemplo: Quarto"
           onValueChange={value => setLargura(value)}
         />
@@ -58,11 +63,17 @@ function App() {
           onValueChange={value => setAltura(value)}
         />
         <p></p>
-        <DropdownTamanhoPlaca title={"Dimensões da placa "} />
+        <DropdownTamanhoPlaca
+          title={"Dimensões da placa "}
+          onValueSelect={value => setAreaPlacaSelecionada(value)}
+        />
         <p></p>
         <BotaoProrio title={"Calcular"} onClick={funcao} />
         <p></p>
-        <p>{resultadosCalculos}</p>
+        <p>{areaTotalText}</p>
+        <p>{quantidadePlacasText}</p>
+        <p>{perfilHorizontalText}</p>
+        <p>{perfilVerticalText}</p>
       </header>
     </div>
   );

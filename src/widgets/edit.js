@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Edit = ({ title, placeholder = "", onValueChange }) => {
+const Edit = ({ title, placeholder = "", type = "number", onValueChange }) => {
   const [value, setValue] = useState("");
 
   const handleChange = e => {
@@ -14,7 +14,7 @@ const Edit = ({ title, placeholder = "", onValueChange }) => {
     <div>
       <label>{title}</label>
       <input
-        type="number"
+        type={type}
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
