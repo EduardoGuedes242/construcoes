@@ -45,13 +45,6 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Edit
-          title="Descrição "
-          type="text"
-          placeholder="Exemplo: Quarto"
-          onValueChange={value => setLargura(value)}
-        />
-        <p></p>
-        <Edit
           title="Largura da parede MT "
           placeholder="Exemplo: 4"
           onValueChange={value => setLargura(value)}
